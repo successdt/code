@@ -1,7 +1,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "iostream"
-#define N 20
+#include "time.h"
+#define N 2000
 #define MAXINT 1000
 using namespace std;
 int graph[N][N] , mst[N][N] , label[N];
@@ -79,6 +80,7 @@ void print_tree(int graph[N][N]){
 int main(int argc, char * argv[])
 {
 	int edge ;
+	int start, finish;
 	for (int i = 0; i < N; ++i)
 	{
 		for (int j = i+1; j < N; ++j)
@@ -87,9 +89,12 @@ int main(int argc, char * argv[])
 			add_edge(graph, i , j, edge );
 		}
 	}
-	print_tree(graph);
+	//print_tree(graph);
 	init_label(label);
+	start = clock();
 	find_min_edge(graph, mst, label);
-	print_tree(mst);
+	finish = clock();
+	//print_tree(mst);
+	cout <<"\n"<<"Thoi gian thuc hien la: "<<(finish - start)/double(CLOCKS_PER_SEC)*1000<<"ms"<<endl;
 	return 0;
 }
